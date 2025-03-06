@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+
+  db-wego:
+    container_name: db-wego
+    image: mysql/mysql-server:5.7
+    networks:
+      - wego
+    environment:
+      MYSQL_DATABASE: 'carpark'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: 'admin'
+      MYSQL_ROOT_PASSWORD: 'PassWego2025!'
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - '3346:3306'
+    expose:
+      - '3346'
+    volumes:
+      - my-db-wego:/var/lib/mysql
+      - /root/apps/wego/config:/etc/mysql 
+      - /root/apps/wego/sql:/docker-entrypoint-initdb.d
+      
+  be-wego:
+    container_name: be-wego
+    build: .
+    depends_on:
+      - db-wego
+    ports:
+      - "9946:9999"
+    mem_limit: 500m
+    mem_reservation: 300m
+    restart: unless-stopped
+    networks:
+      - wego
+      
+networks:
+  wego:
+
+volumes:
+  my-db-wego:
