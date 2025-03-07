@@ -56,9 +56,9 @@ RUN ./build.sh
 ```python
 
 The system will automatically fetch data from the endpoint https://api.data.gov.sg/v1/transport/carpark-availability every 3 minutes.
-If you want to disable automatic fetching, set the value of **carpark.api.canFetch** to false.
+If you want to disable automatic fetching, set the value of ___carpark.api.canFetch___ to false.
 
-The fetching schedule can also be adjusted as needed by modifying the value of <strong>carpark.cron</strong>
+The fetching schedule can also be adjusted as needed by modifying the value of ##### carpark.cron
 
 ![fetching data](./fetching.png)
 
